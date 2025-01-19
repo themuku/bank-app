@@ -1,0 +1,252 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --main-gray: #eee;
+    --main-green: rgb(39, 190, 39);
+    --light-gray: #fefefe;
+    --text-gray: #666;
+    --text-dark-gray: #444;
+    --text-light-gray: #888;
+    --main-red: rgb(255, 50, 50);
+}
+
+body {
+    background-color: var(--main-gray);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+}
+
+nav {
+    padding-inline: 180px
+}
+
+.toaster {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    width: 350px;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 18px;
+    top: 4%;
+    left: 40%;
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.147);
+
+    .check {
+        color: var(--main-green);
+    }
+
+    .error {
+        color: var(--main-red);
+    }
+}
+
+/* Header Login */
+.logo {
+    padding: 20px 0;
+    font-size: 38px;
+    font-family: serif;
+
+    i,
+    span {
+        color: var(--main-green);
+    }
+}
+
+/* Login form */
+.login-form {
+    background-color: var(--light-gray);
+    padding: 30px;
+    width: 450px;
+    margin-inline: auto;
+    margin-top: calc(25% - 84px);
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 15px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.login-label {
+    color: var(--text-gray);
+    font-size: 24px;
+}
+
+.form-input {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--text-gray);
+    outline: none;
+    font-size: 24px;
+}
+
+.email-input {}
+
+.pass-input {}
+
+.login-btn,
+.signup-btn {
+    background-color: var(--main-green);
+    border: 2px solid var(--main-green);
+    width: 30%;
+    padding: 6px 10px;
+    align-self: center;
+    border-radius: 12px;
+    color: white;
+    font-size: 24px;
+    transition: all 100ms ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+        background-color: transparent;
+        color: var(--main-green);
+    }
+
+    &:active {
+        scale: 0.97;
+    }
+}
+
+.form-text {
+    text-align: center;
+    font-size: 18px;
+
+    a {
+        color: var(--main-green);
+    }
+}
+
+/* Main */
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    .image-wrapper {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .profile {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        span {
+            font-weight: 600;
+            cursor: default;
+        }
+    }
+
+    img {
+        width: 100%;
+    }
+
+    button {
+        background-color: rgb(255, 100, 100);
+        border: none;
+        padding: 12px 24px;
+        font-size: 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 150ms ease;
+
+        &:hover {
+            background-color: rgb(255, 63, 63);
+        }
+    }
+}
+
+main {
+    padding: 40px;
+    height: calc(100vh - 84px);
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 30px;
+    grid-template-rows: masonry;
+
+    .panel {
+        background-color: #fff;
+        border-radius: 20px;
+        height: calc(50% - 10px);
+        padding: 20px;
+    }
+
+    .balance-panel {
+        height: calc(40% - 10px);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .account-number {
+            font-size: 24px;
+            color: var(--text-light-gray);
+            cursor: pointer;
+            transition: all 100ms ease;
+            font-weight: 600;
+
+            &:hover {
+                color: var(--text-dark-gray);
+            }
+        }
+
+        .balance-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+
+            i {
+                font-size: 24px;
+                color: var(--text-gray);
+                cursor: pointer;
+
+                &:hover {
+                    color: var(--text-dark-gray);
+                }
+            }
+        }
+
+        .balance {
+            font-weight: 700;
+            font-size: 64px;
+        }
+    }
+
+    .history-panel {
+        height: calc(60% - 10px);
+    }
+
+    .cashback-panel {
+        height: calc(30% - 10px);
+    }
+
+    .operation-panel {
+        height: calc(70% - 10px);
+    }
+}

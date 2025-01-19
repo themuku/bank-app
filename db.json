@@ -1,0 +1,25 @@
+{
+  "accounts": [
+    {
+      "email": "amin@gmail.com",
+      "password": "123321",
+      "balance": 1000,
+      "name": "Amin Aliosmanov",
+      "profileUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH1xbJpEpbwEsp4SsFULetPAqG26gtYb0kJg&s"
+    },
+    {
+      "email": "cavidan@yahoo.com",
+      "password": "321123",
+      "balance": 1000,
+      "name": "Cavidan Ibrahimov",
+      "profileUrl": ""
+    },
+    {
+      "email": "polad@mail.ru",
+      "password": "312231",
+      "balance": 1000,
+      "name": "Polad Mammadli",
+      "profileUrl": ""
+    }
+  ]
+}
