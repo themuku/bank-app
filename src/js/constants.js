@@ -7,6 +7,8 @@ export let accounts = [
     profileUrl:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH1xbJpEpbwEsp4SsFULetPAqG26gtYb0kJg&s",
     accountNumber: "1234 5678 1234 5678",
+    cvv: "123",
+    date: new Date(),
   },
   {
     email: "cavidan@yahoo.com",
@@ -14,7 +16,9 @@ export let accounts = [
     balance: 1000,
     name: "Cavidan Ibrahimov",
     profileUrl: "",
-    accountNumber: "1234 5678 1234 5678",
+    accountNumber: "1234 5678 1234 1234",
+    cvv: "123",
+    expiryDate: new Date(),
   },
   {
     email: "polad@mail.ru",
@@ -22,8 +26,7 @@ export let accounts = [
     balance: 1000,
     name: "Polad Mammadli",
     profileUrl: "",
-    accountNumber: "1234 5678 1234 5678",
+    accountNumber: "1234 5678 5678 1234",
+    date: new Date(),
   },
 ];
-
-export let activeAccount = [];

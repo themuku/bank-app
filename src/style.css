@@ -57,6 +57,7 @@ nav {
     padding: 20px 0;
     font-size: 38px;
     font-family: serif;
+    cursor: default;
 
     i,
     span {
@@ -196,10 +197,25 @@ main {
         border-radius: 20px;
         height: calc(50% - 10px);
         padding: 20px;
+
+        h2 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+    }
+
+    .balance-panel {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
     }
 
     .balance-panel {
         height: calc(40% - 10px);
+    }
+
+    .balance-panel .first-column {
         display: flex;
         flex-direction: column;
         gap: 20px;
@@ -210,8 +226,25 @@ main {
             cursor: pointer;
             transition: all 100ms ease;
             font-weight: 600;
+            width: fit-content;
 
             &:hover {
+                color: var(--text-dark-gray);
+            }
+        }
+
+        .card-info {
+            font-size: 24px;
+            color: var(--text-light-gray);
+            display: flex;
+            gap: 30px;
+            cursor: default;
+
+            .cvv {
+                cursor: pointer;
+            }
+
+            .cvv:hover {
                 color: var(--text-dark-gray);
             }
         }
@@ -235,11 +268,81 @@ main {
         .balance {
             font-weight: 700;
             font-size: 64px;
+            cursor: default;
+        }
+    }
+
+    .second-column {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        gap: 10px;
+
+        button {
+            background-color: var(--light-gray);
+            border: 2px solid var(--text-gray);
+            font-size: 32px;
+            width: 245px;
+            text-align: left;
+            padding: 12px 16px;
+            border-radius: 10px;
+            transition: all 100ms ease;
+            cursor: pointer;
+
+            &:hover {
+                background-color: var(--main-gray);
+            }
         }
     }
 
     .history-panel {
         height: calc(60% - 10px);
+        position: relative;
+
+        .clear-all {
+            position: absolute;
+            top: 33px;
+            right: 25px;
+            color: var(--main-red);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style-type: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            overflow-y: scroll;
+            height: 330px;
+
+            li {
+                .minus {
+                    color: var(--main-red);
+                }
+
+                cursor: default;
+
+                .plus {
+                    color: var(--main-green);
+                }
+
+                div {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+
+                display: flex;
+                font-size: 24px;
+                border: 2px solid var(--main-gray);
+                background-color: var(--main-gray);
+                justify-content: space-between;
+                padding: 12px 24px;
+                border-radius: 12px;
+            }
+        }
     }
 
     .cashback-panel {
@@ -248,5 +351,49 @@ main {
 
     .operation-panel {
         height: calc(70% - 10px);
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+
+            .form-field {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                label,
+                input {
+                    font-size: 24px;
+                }
+
+                label {
+                    color: var(--text-gray);
+
+                    &:hover {
+                        color: var(--text-dark-gray);
+                    }
+                }
+
+                input {
+                    padding: 12px 18px;
+                    border-radius: 12px;
+                    border: 2px solid var(--text-gray)
+                }
+            }
+
+            button {
+                width: 300px;
+                margin-top: 90px;
+            }
+        }
+    }
+
+    .show-btn {
+        display: inline-block;
+    }
+
+    .hide-btn {
+        display: none;
     }
 }

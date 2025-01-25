@@ -39,14 +39,100 @@
 
     <main>
       <div class="balance-panel panel">
-        <div class="balance-wrapper">
-          <p class="balance">1000 AZN</p>
-          <i class="fa-regular fa-eye show-btn"></i>
+        <div class="first-column">
+          <div class="balance-wrapper">
+            <p class="balance">1000 AZN</p>
+            <i class="fa-regular fa-eye show-btn"></i>
+            <i class="fa-regular fa-eye-slash hide-btn"></i>
+          </div>
+          <p class="account-number"></p>
+          <div class="card-info">
+            <span class="expiry-date"></span>
+            <span class="cvv">***</span>
+          </div>
         </div>
-        <p class="account-number"></p>
+        <div class="second-column">
+          <button>Change PIN <i class="fa-solid fa-lock"></i></button>
+          <button>Block card <i class="fa-solid fa-circle-minus"></i></button>
+          <button>Info <i class="fa-solid fa-info"></i></button>
+        </div>
       </div>
-      <div class="operation-panel panel"></div>
-      <div class="history-panel panel"></div>
+      <div class="operation-panel panel">
+        <h2>Transactions</h2>
+        <form class="operations-form">
+          <div class="form-field">
+            <label class="operations-form--label" for="accountNumber"
+              >Enter account number</label
+            >
+            <input
+              id="accountNumber"
+              type="text"
+              placeholder="e.g. 1234 5678 9123 4567"
+            />
+          </div>
+          <div class="form-field">
+            <label for="amount">Enter amount (AZN)</label>
+            <input type="text" placeholder="e.g. 5" class="amount" />
+          </div>
+
+          <button type="submit" class="login-btn">Send money</button>
+        </form>
+      </div>
+      <div class="history-panel panel">
+        <h2>History</h2>
+        <i class="fa-solid fa-trash clear-all"></i>
+        <ul>
+          <li>
+            <div>
+              <i class="fa-solid fa-circle-minus minus"></i>
+              <p>Card Transfer</p>
+            </div>
+            <p class="minus">-3 AZN</p>
+          </li>
+          <li>
+            <div>
+              <i class="fa-solid fa-circle-plus plus"></i>
+              <p>Wage</p>
+            </div>
+            <p class="plus">+1 AZN</p>
+          </li>
+          <li>
+            <div>
+              <i class="fa-solid fa-circle-plus plus"></i>
+              <p>Wage</p>
+            </div>
+            <p class="plus">+1 AZN</p>
+          </li>
+          <li>
+            <div>
+              <i class="fa-solid fa-circle-plus plus"></i>
+              <p>Wage</p>
+            </div>
+            <p class="plus">+1 AZN</p>
+          </li>
+          <li>
+            <div>
+              <i class="fa-solid fa-circle-plus plus"></i>
+              <p>Wage</p>
+            </div>
+            <p class="plus">+1 AZN</p>
+          </li>
+          <li>
+            <div>
+              <i class="fa-solid fa-circle-plus plus"></i>
+              <p>Wage</p>
+            </div>
+            <p class="plus">+1 AZN</p>
+          </li>
+          <li>
+            <div>
+              <i class="fa-solid fa-circle-plus plus"></i>
+              <p>Wage</p>
+            </div>
+            <p class="plus">+1 AZN</p>
+          </li>
+        </ul>
+      </div>
       <div class="cashback-panel panel"></div>
     </main>
 
