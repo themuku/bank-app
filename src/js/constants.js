@@ -8,7 +8,7 @@ export let accounts = [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH1xbJpEpbwEsp4SsFULetPAqG26gtYb0kJg&s",
     accountNumber: "1234 5678 1234 5678",
     cvv: "123",
-    date: new Date(),
+    expiryDate: new Date(),
     history: [
       {
         date: new Date(),
@@ -23,6 +23,7 @@ export let accounts = [
         from: "",
       },
     ],
+    cashback: 0,
   },
   {
     email: "cavidan@yahoo.com",
@@ -47,6 +48,7 @@ export let accounts = [
         from: "",
       },
     ],
+    cashback: 0,
   },
   {
     email: "polad@mail.ru",
@@ -70,5 +72,6 @@ export let accounts = [
         from: "",
       },
     ],
+    cashback: 0,
   },
 ];

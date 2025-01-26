@@ -351,6 +351,36 @@ main {
 
     .cashback-panel {
         height: calc(30% - 10px);
+
+        div {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            cursor: default;
+
+            i {
+                cursor: pointer;
+                font-size: 24px;
+                color: var(--text-gray);
+                transition: all 200ms ease;
+
+                &:hover {
+                    color: var(--text-dark-gray);
+                    rotate: 180deg;
+                }
+            }
+
+            margin-bottom: 60px;
+        }
+
+        .cashback-amount {
+            font-size: 48px;
+
+            span {
+                color: var(--main-green);
+                font-weight: 700;
+            }
+        }
     }
 
     .operation-panel {

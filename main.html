@@ -75,7 +75,9 @@
             <input type="text" placeholder="e.g. 5" class="amount" />
           </div>
 
-          <button type="submit" class="login-btn">Send money</button>
+          <button type="button" class="login-btn transfer-btn">
+            Send money
+          </button>
         </form>
       </div>
       <div class="history-panel panel">
@@ -83,7 +85,13 @@
         <i class="fa-solid fa-trash clear-all"></i>
         <ul></ul>
       </div>
-      <div class="cashback-panel panel"></div>
+      <div class="cashback-panel panel">
+        <div>
+          <p class="cashback-amount">0 Halal<span>COINS</span></p>
+          <i class="fa-solid fa-arrows-rotate"></i>
+        </div>
+        <button class="widthdraw-btn login-btn">Withdraw</button>
+      </div>
     </main>
 
     <script type="module" src="./src/js/main.js"></script>

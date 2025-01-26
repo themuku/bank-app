@@ -1,9 +1,5 @@
-import { accounts } from "./constants";
-import {
-  getActiveAccount,
-  logoutAccount,
-  storeActiveAccount,
-} from "./storeAccount";
+import { accounts as allAccounts } from "./constants";
+import { getAccount, logoutAccount, storeAccount } from "./storeAccount";
 import dayjs from "dayjs";
 
 const navMenu = document.querySelector(".nav-menu");
@@ -16,12 +12,18 @@ const hideBtn = document.querySelector(".hide-btn");
 const balance = main.querySelector(".balance");
 const cardInfo = document.querySelector(".card-info");
 const operationsForm = document.querySelector(".operations-form");
-const accountNumberInput = operationsForm.querySelector("input");
+const accountNumberInput = document.getElementById("accountNumber");
 const amount = operationsForm.querySelector(".amount");
 const historyList = document.querySelector(".history-panel ul");
 const historyClearBtn = document.querySelector(".clear-all");
+const transferBtn = document.querySelector(".transfer-btn");
+const cashbackAmount = document.querySelector(".cashback-amount");
 
-const account = getActiveAccount();
+const CASHBACK_RATE = 0.05;
+
+const account = getAccount();
+
+let accounts = getAccount("accounts") ? getAccount("accounts") : allAccounts;
 
 let isToasterVisible = false;
 let isCvvVisible = false;
@@ -30,12 +32,14 @@ navMenu.querySelector("img").src = account.profileUrl;
 navMenu.querySelector("span").textContent = account.name;
 accountNumber.textContent = account.accountNumber;
 balance.textContent = `${account.balance} AZN`;
+cashbackAmount.innerHTML = `${account.cashback * 100} Halal<span>COINS</span>`;
 
 function renderHistoryList(list) {
   if (list.length === 0) {
     historyList.innerHTML = "";
     return;
   }
+  historyList.innerHTML = "";
 
   list.toReversed().forEach((transfer) => {
     const { date, to, from, amount } = transfer;
@@ -61,6 +65,8 @@ function renderHistoryList(list) {
 }
 
 logoutBtn.addEventListener("click", () => {
+  storeAccount(account);
+  storeAccount(accounts, "accounts");
   logoutAccount();
   window.location = "login.html";
 });
@@ -72,21 +78,23 @@ accountNumber.addEventListener("click", (event) => {
   navigator.clipboard.writeText(accNum);
 });
 
-function toast(isVisible, isError = false) {
+function toast(isVisible, isError = false, message = "") {
   let html = "";
+  message = message.length > 0 ? message : !isError ? "Success" : "Error";
+
   if (isVisible) {
     if (!isError) {
       html = `
       <div class="toaster animate__animated animate__bounceInDown">
       <i class="fa-solid fa-circle-check check"></i>
-      <span>Success</span>
+      <span>${message}</span>
       </div>
       `;
     } else {
       html = `
       <div class="toaster animate__animated animate__bounceInDown">
       <i class="fa-solid fa-circle-minus error"></i>
-      <span>Error</span>
+      <span>${message}</span>
       </div>
       `;
     }
@@ -114,13 +122,9 @@ hideBtn.addEventListener("click", (event) => {
   balance.textContent = `${account.balance} AZN`;
 });
 
-const expiryDate = new Date(account.date);
-
-cardInfo.querySelector(".expiry-date").textContent = `${
-  expiryDate.getMonth() < 10
-    ? `0${expiryDate.getMonth() + 1}`
-    : expiryDate.getMonth() + 1
-}/${String(expiryDate.getFullYear()).substring(2)}`;
+cardInfo.querySelector(".expiry-date").textContent = dayjs(
+  account.expiryDate
+).format("MM/YY");
 
 cardInfo.querySelector(".cvv").addEventListener("click", (event) => {
   if (isCvvVisible) {
@@ -132,28 +136,63 @@ cardInfo.querySelector(".cvv").addEventListener("click", (event) => {
   }
 });
 
-operationsForm.addEventListener("submit", (event) => {
-  event.preventDefault();
+transferBtn.addEventListener("click", () => {
   const accNum = accountNumberInput.value;
 
   const foundAccount = accounts.find((acc) => acc.accountNumber === accNum);
 
-  if (!foundAccount || account.balance < +amount.value) {
-    isToasterVisible = true;
-    toast(isToasterVisible, true);
+  if (!foundAccount) {
+    toast(isToasterVisible, true, "Wrong account number");
+    return;
+  }
+
+  if (account.balance < +amount.value) {
+    toast(isToasterVisible, true, "Insufficient funds");
+    return;
+  }
+
+  if (account.balance < 1) {
+    toast(isToasterVisible, true, "Enter amount greate than 1 AZN");
     return;
   }
 
   foundAccount.balance += +amount.value;
   account.balance -= +amount.value;
-  storeActiveAccount(account);
+  // TODO
+  account.cashback += +amount.value * CASHBACK_RATE;
+
+  const operationDate = new Date();
+
+  account.history.push({
+    date: operationDate,
+    to: foundAccount.name,
+    from: "",
+    amount: -amount.value,
+  });
+
+  foundAccount.history.push({
+    date: operationDate,
+    to: "",
+    from: account.name,
+    amount: amount.value,
+  });
+
+  storeAccount(account);
+  storeAccount(accounts, "accounts");
+  renderHistoryList(account.history);
+
   balance.textContent = `${account.balance} AZN`;
+
+  amount.value = "";
+  accountNumberInput.value = "";
+
+  toast(isToasterVisible, false, "Transfer was successful");
 });
 
 renderHistoryList(account.history);
 
 historyClearBtn.addEventListener("click", () => {
   account.history = [];
-  storeActiveAccount(account);
+  storeAccount(account);
   renderHistoryList([]);
 });

@@ -1,7 +1,9 @@
-import { accounts } from "./constants";
-import { storeActiveAccount } from "./storeAccount";
+import { accounts as allAccounts } from "./constants";
+import { storeAccount, getAccount } from "./storeAccount";
 
 const form = document.querySelector(".login-form");
+
+let accounts = getAccount("accounts") ? getAccount("accounts") : allAccounts;
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -11,10 +13,9 @@ form.addEventListener("submit", (event) => {
   const foundAccount = accounts.find(
     (acc) => acc.email === email && acc.password === password
   );
-  console.log(foundAccount);
 
   if (foundAccount) {
-    storeActiveAccount(foundAccount);
+    storeAccount(foundAccount);
     window.location = "main.html";
   } else {
     alert("Invalid credentials");
