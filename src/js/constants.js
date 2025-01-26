@@ -9,6 +9,20 @@ export let accounts = [
     accountNumber: "1234 5678 1234 5678",
     cvv: "123",
     date: new Date(),
+    history: [
+      {
+        date: new Date(),
+        amount: 10,
+        to: "",
+        from: "Scholarship",
+      },
+      {
+        date: new Date(),
+        amount: -10,
+        to: "Mc Donald's",
+        from: "",
+      },
+    ],
   },
   {
     email: "cavidan@yahoo.com",
@@ -19,6 +33,20 @@ export let accounts = [
     accountNumber: "1234 5678 1234 1234",
     cvv: "123",
     expiryDate: new Date(),
+    history: [
+      {
+        date: new Date(),
+        amount: 10,
+        to: "",
+        from: "Scholarship",
+      },
+      {
+        date: new Date(),
+        amount: -10,
+        to: "Mc Donald's",
+        from: "",
+      },
+    ],
   },
   {
     email: "polad@mail.ru",
@@ -28,5 +56,19 @@ export let accounts = [
     profileUrl: "",
     accountNumber: "1234 5678 5678 1234",
     date: new Date(),
+    history: [
+      {
+        date: new Date(),
+        amount: 10,
+        to: "",
+        from: "Scholarship",
+      },
+      {
+        date: new Date(),
+        amount: -10,
+        to: "Mc Donald's",
+        from: "",
+      },
+    ],
   },
 ];

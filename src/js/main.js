@@ -4,6 +4,7 @@ import {
   logoutAccount,
   storeActiveAccount,
 } from "./storeAccount";
+import dayjs from "dayjs";
 
 const navMenu = document.querySelector(".nav-menu");
 const logoutBtn = navMenu.querySelector("button");
@@ -17,6 +18,8 @@ const cardInfo = document.querySelector(".card-info");
 const operationsForm = document.querySelector(".operations-form");
 const accountNumberInput = operationsForm.querySelector("input");
 const amount = operationsForm.querySelector(".amount");
+const historyList = document.querySelector(".history-panel ul");
+const historyClearBtn = document.querySelector(".clear-all");
 
 const account = getActiveAccount();
 
@@ -27,6 +30,35 @@ navMenu.querySelector("img").src = account.profileUrl;
 navMenu.querySelector("span").textContent = account.name;
 accountNumber.textContent = account.accountNumber;
 balance.textContent = `${account.balance} AZN`;
+
+function renderHistoryList(list) {
+  if (list.length === 0) {
+    historyList.innerHTML = "";
+    return;
+  }
+
+  list.toReversed().forEach((transfer) => {
+    const { date, to, from, amount } = transfer;
+
+    const message = amount > 0 ? from : to;
+    const formattedDate = dayjs(date)
+      .locale("az-az")
+      .format("DD.MM.YYYY, HH:mm");
+
+    historyList.innerHTML += `
+    <li>
+      <div>
+        <i class="fa-solid fa-circle-${amount > 0 ? "plus" : "minus"} ${
+      amount > 0 ? "plus" : "minus"
+    }"></i>
+        <p>${message}</p>
+        <span class="history-date">${formattedDate}</span>
+      </div>
+      <p class="${amount > 0 ? "plus" : "minus"}">${amount} AZN</p>
+    </li>
+    `;
+  });
+}
 
 logoutBtn.addEventListener("click", () => {
   logoutAccount();
@@ -116,4 +148,12 @@ operationsForm.addEventListener("submit", (event) => {
   account.balance -= +amount.value;
   storeActiveAccount(account);
   balance.textContent = `${account.balance} AZN`;
+});
+
+renderHistoryList(account.history);
+
+historyClearBtn.addEventListener("click", () => {
+  account.history = [];
+  storeActiveAccount(account);
+  renderHistoryList([]);
 });

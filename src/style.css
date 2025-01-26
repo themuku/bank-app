@@ -300,6 +300,10 @@ main {
         height: calc(60% - 10px);
         position: relative;
 
+        .history-date {
+            color: var(--text-gray);
+        }
+
         .clear-all {
             position: absolute;
             top: 33px;

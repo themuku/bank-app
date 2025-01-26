@@ -10,6 +10,7 @@
     "serve": "vite serve"
   },
   "dependencies": {
+    "dayjs": "^1.11.13",
     "validator": "^13.12.0"
   },
   "devDependencies": {
