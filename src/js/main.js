@@ -1,19 +1,15 @@
-import { accounts as allAccounts } from "./constants";
-import { getAccount, logoutAccount, storeAccount } from "./storeAccount";
+import { getAccount, logoutAccount } from "./storeAccount";
 import dayjs from "dayjs";
 
-const navMenu = document.querySelector(".nav-menu");
-const logoutBtn = navMenu.querySelector("button");
+const logoutBtn = document.querySelector(".nav-menu button");
 const main = document.querySelector("main");
-const accountNumber = main.querySelector(".account-number");
-const toaster = document.querySelector(".toaster");
+const accountNumber = document.querySelector("main .account-number");
 const showBtn = document.querySelector(".show-btn");
 const hideBtn = document.querySelector(".hide-btn");
-const balance = main.querySelector(".balance");
+const balance = document.querySelector("main .balance");
 const cardInfo = document.querySelector(".card-info");
-const operationsForm = document.querySelector(".operations-form");
 const accountNumberInput = document.getElementById("accountNumber");
-const amount = operationsForm.querySelector(".amount");
+const amount = document.querySelector(".operations-form .amount");
 const historyList = document.querySelector(".history-panel ul");
 const historyClearBtn = document.querySelector(".clear-all");
 const transferBtn = document.querySelector(".transfer-btn");
@@ -21,18 +17,31 @@ const cashbackAmount = document.querySelector(".cashback-amount");
 
 const CASHBACK_RATE = 0.05;
 
-const account = getAccount();
+let account = null;
 
-let accounts = getAccount("accounts") ? getAccount("accounts") : allAccounts;
+let accountId = getAccount();
 
 let isToasterVisible = false;
 let isCvvVisible = false;
 
-navMenu.querySelector("img").src = account.profileUrl;
-navMenu.querySelector("span").textContent = account.name;
-accountNumber.textContent = account.accountNumber;
-balance.textContent = `${account.balance} AZN`;
-cashbackAmount.innerHTML = `${account.cashback * 100} Halal<span>COINS</span>`;
+fetch(`http://localhost:3000/accounts/${accountId}`)
+  .then((res) => res.json())
+  .then((acc) => {
+    document.querySelector(".nav-menu img").src = acc.profileUrl;
+    document.querySelector(".nav-menu span").textContent = acc.name;
+    accountNumber.textContent = acc.accountNumber;
+    balance.textContent = `${acc.balance} AZN`;
+    cashbackAmount.innerHTML = `${acc.cashback * 100} Halal<span>COINS</span>`;
+
+    cardInfo.querySelector(".expiry-date").textContent = dayjs(
+      acc.expiryDate
+    ).format("MM/YY");
+
+    renderHistoryList(acc.history);
+
+    ///////////////////
+    account = { ...acc };
+  });
 
 function renderHistoryList(list) {
   if (list.length === 0) {
@@ -65,8 +74,6 @@ function renderHistoryList(list) {
 }
 
 logoutBtn.addEventListener("click", () => {
-  storeAccount(account);
-  storeAccount(accounts, "accounts");
   logoutAccount();
   window.location = "login.html";
 });
@@ -78,7 +85,7 @@ accountNumber.addEventListener("click", (event) => {
   navigator.clipboard.writeText(accNum);
 });
 
-function toast(isVisible, isError = false, message = "") {
+export function toast(isVisible, isError = false, message = "") {
   let html = "";
   message = message.length > 0 ? message : !isError ? "Success" : "Error";
 
@@ -122,10 +129,6 @@ hideBtn.addEventListener("click", (event) => {
   balance.textContent = `${account.balance} AZN`;
 });
 
-cardInfo.querySelector(".expiry-date").textContent = dayjs(
-  account.expiryDate
-).format("MM/YY");
-
 cardInfo.querySelector(".cvv").addEventListener("click", (event) => {
   if (isCvvVisible) {
     event.target.textContent = "***";
@@ -139,60 +142,73 @@ cardInfo.querySelector(".cvv").addEventListener("click", (event) => {
 transferBtn.addEventListener("click", () => {
   const accNum = accountNumberInput.value;
 
-  const foundAccount = accounts.find((acc) => acc.accountNumber === accNum);
+  fetch("http://localhost:3000/accounts")
+    .then((res) => res.json())
+    .then((acc) => {
+      const foundAccount = acc.find((acc) => acc.accountNumber === accNum);
 
-  if (!foundAccount) {
-    toast(isToasterVisible, true, "Wrong account number");
-    return;
-  }
+      if (!foundAccount) {
+        toast(isToasterVisible, true, "Wrong account number");
+        return;
+      }
 
-  if (account.balance < +amount.value) {
-    toast(isToasterVisible, true, "Insufficient funds");
-    return;
-  }
+      if (account.balance < +amount.value) {
+        toast(isToasterVisible, true, "Insufficient funds");
+        return;
+      }
 
-  if (account.balance < 1) {
-    toast(isToasterVisible, true, "Enter amount greate than 1 AZN");
-    return;
-  }
+      if (account.balance < 1) {
+        toast(isToasterVisible, true, "Enter amount greate than 1 AZN");
+        return;
+      }
 
-  foundAccount.balance += +amount.value;
-  account.balance -= +amount.value;
-  // TODO
-  account.cashback += +amount.value * CASHBACK_RATE;
+      foundAccount.balance += +amount.value;
+      account.balance -= +amount.value;
+      // TODO
+      account.cashback += +amount.value * CASHBACK_RATE;
 
-  const operationDate = new Date();
+      const operationDate = new Date();
 
-  account.history.push({
-    date: operationDate,
-    to: foundAccount.name,
-    from: "",
-    amount: -amount.value,
-  });
+      account.history.push({
+        date: operationDate,
+        to: foundAccount.name,
+        from: "",
+        amount: -amount.value,
+      });
 
-  foundAccount.history.push({
-    date: operationDate,
-    to: "",
-    from: account.name,
-    amount: amount.value,
-  });
+      foundAccount.history.push({
+        date: operationDate,
+        to: "",
+        from: account.name,
+        amount: amount.value,
+      });
 
-  storeAccount(account);
-  storeAccount(accounts, "accounts");
-  renderHistoryList(account.history);
+      renderHistoryList(account.history);
 
-  balance.textContent = `${account.balance} AZN`;
+      balance.textContent = `${account.balance} AZN`;
 
-  amount.value = "";
-  accountNumberInput.value = "";
+      amount.value = "";
+      accountNumberInput.value = "";
 
-  toast(isToasterVisible, false, "Transfer was successful");
+      toast(isToasterVisible, false, "Transfer was successful");
+
+      fetch(`http://localhost:3000/accounts/${accountId}`, {
+        method: "POST",
+        body: JSON.stringify(account),
+      });
+
+      fetch(`http://localhost:3000/accounts/${foundAccount.id}`, {
+        method: "PUT",
+        body: JSON.stringify(foundAccount),
+      });
+    });
 });
-
-renderHistoryList(account.history);
 
 historyClearBtn.addEventListener("click", () => {
   account.history = [];
-  storeAccount(account);
+  fetch(`http://localhost:3000/accounts/${accountId}`, {
+    method: "PUT",
+    body: JSON.stringify(account),
+  });
   renderHistoryList([]);
 });

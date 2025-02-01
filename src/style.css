@@ -1,433 +1,440 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
 
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 :root {
-    --main-gray: #eee;
-    --main-green: rgb(39, 190, 39);
-    --light-gray: #fefefe;
-    --text-gray: #666;
-    --text-dark-gray: #444;
-    --text-light-gray: #888;
-    --main-red: rgb(255, 50, 50);
+  --main-gray: #eee;
+  --main-green: rgb(39, 190, 39);
+  --light-gray: #fefefe;
+  --text-gray: #666;
+  --text-dark-gray: #444;
+  --text-light-gray: #888;
+  --main-red: rgb(255, 50, 50);
 }
 
 body {
-    background-color: var(--main-gray);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    position: relative;
+  background-color: var(--main-gray);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+  overflow-y: hidden;
 }
 
 nav {
-    padding-inline: 180px
+  padding-inline: 180px;
 }
 
 .toaster {
-    display: none;
-    position: absolute;
-    background-color: #fff;
-    width: 350px;
-    padding: 12px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-    border-radius: 10px;
-    font-weight: 700;
-    font-size: 18px;
-    top: 4%;
-    left: 40%;
-    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.147);
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  width: 350px;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 18px;
+  top: 4%;
+  left: 40%;
+  box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.147);
 
-    .check {
-        color: var(--main-green);
-    }
+  .check {
+    color: var(--main-green);
+  }
 
-    .error {
-        color: var(--main-red);
-    }
+  .error {
+    color: var(--main-red);
+  }
 }
 
 /* Header Login */
 .logo {
-    padding: 20px 0;
-    font-size: 38px;
-    font-family: serif;
-    cursor: default;
+  padding: 20px 0;
+  font-size: 38px;
+  font-family: serif;
+  cursor: default;
 
-    i,
-    span {
-        color: var(--main-green);
-    }
+  i,
+  span {
+    color: var(--main-green);
+  }
 }
 
 /* Login form */
 .login-form {
-    background-color: var(--light-gray);
-    padding: 30px;
-    width: 450px;
-    margin-inline: auto;
-    margin-top: calc(25% - 84px);
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    border-radius: 15px;
+  background-color: var(--light-gray);
+  padding: 30px;
+  width: 450px;
+  margin-inline: auto;
+  margin-top: calc(25% - 84px);
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: 15px;
 }
 
 .form-field {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .login-label {
-    color: var(--text-gray);
-    font-size: 24px;
+  color: var(--text-gray);
+  font-size: 24px;
 }
 
 .form-input {
-    padding: 8px 16px;
-    border-radius: 8px;
-    border: 1px solid var(--text-gray);
-    outline: none;
-    font-size: 24px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--text-gray);
+  outline: none;
+  font-size: 24px;
 }
 
-.email-input {}
+.email-input {
+}
 
-.pass-input {}
+.pass-input {
+}
 
 .login-btn,
 .signup-btn {
-    background-color: var(--main-green);
-    border: 2px solid var(--main-green);
-    width: 30%;
-    padding: 6px 10px;
-    align-self: center;
-    border-radius: 12px;
-    color: white;
-    font-size: 24px;
-    transition: all 100ms ease-in-out;
-    cursor: pointer;
+  background-color: var(--main-green);
+  border: 2px solid var(--main-green);
+  width: 30%;
+  padding: 6px 10px;
+  align-self: center;
+  border-radius: 12px;
+  color: white;
+  font-size: 24px;
+  transition: all 100ms ease-in-out;
+  cursor: pointer;
 
-    &:hover {
-        background-color: transparent;
-        color: var(--main-green);
-    }
+  &:hover {
+    background-color: transparent;
+    color: var(--main-green);
+  }
 
-    &:active {
-        scale: 0.97;
-    }
+  &:active {
+    scale: 0.97;
+  }
 }
 
 .form-text {
-    text-align: center;
-    font-size: 18px;
+  text-align: center;
+  font-size: 18px;
 
-    a {
-        color: var(--main-green);
-    }
+  a {
+    color: var(--main-green);
+  }
 }
 
 /* Main */
 
 .main-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+
+  .image-wrapper {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .profile {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 10px;
 
-    .image-wrapper {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        overflow: hidden;
+    span {
+      font-weight: 600;
+      cursor: default;
     }
+  }
 
-    .profile {
-        display: flex;
-        align-items: center;
-        gap: 10px;
+  img {
+    width: 100%;
+  }
 
-        span {
-            font-weight: 600;
-            cursor: default;
-        }
+  button {
+    background-color: rgb(255, 100, 100);
+    border: none;
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 150ms ease;
+
+    &:hover {
+      background-color: rgb(255, 63, 63);
     }
-
-    img {
-        width: 100%;
-    }
-
-    button {
-        background-color: rgb(255, 100, 100);
-        border: none;
-        padding: 12px 24px;
-        font-size: 18px;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: all 150ms ease;
-
-        &:hover {
-            background-color: rgb(255, 63, 63);
-        }
-    }
+  }
 }
 
 main {
-    padding: 40px;
-    height: calc(100vh - 84px);
+  padding: 40px;
+  height: calc(100vh - 84px);
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 30px;
+  grid-template-rows: masonry;
+
+  .panel {
+    background-color: #fff;
+    border-radius: 20px;
+    height: calc(50% - 10px);
+    padding: 20px;
+
+    h2 {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 30px;
+    }
+  }
+
+  .balance-panel {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 30px;
-    grid-template-rows: masonry;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
 
-    .panel {
-        background-color: #fff;
-        border-radius: 20px;
-        height: calc(50% - 10px);
-        padding: 20px;
+  .balance-panel {
+    height: calc(40% - 10px);
+  }
 
-        h2 {
-            text-align: center;
-            font-size: 32px;
-            margin-bottom: 30px;
-        }
+  .balance-panel .first-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .account-number {
+      font-size: 24px;
+      color: var(--text-light-gray);
+      cursor: pointer;
+      transition: all 100ms ease;
+      font-weight: 600;
+      width: fit-content;
+
+      &:hover {
+        color: var(--text-dark-gray);
+      }
     }
 
-    .balance-panel {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
+    .card-info {
+      font-size: 24px;
+      color: var(--text-light-gray);
+      display: flex;
+      gap: 30px;
+      cursor: default;
+
+      .cvv {
+        cursor: pointer;
+      }
+
+      .cvv:hover {
+        color: var(--text-dark-gray);
+      }
     }
 
-    .balance-panel {
-        height: calc(40% - 10px);
+    .balance-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+
+      i {
+        font-size: 24px;
+        color: var(--text-gray);
+        cursor: pointer;
+
+        &:hover {
+          color: var(--text-dark-gray);
+        }
+      }
     }
 
-    .balance-panel .first-column {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
+    .balance {
+      font-weight: 700;
+      font-size: 64px;
+      cursor: default;
+    }
+  }
 
-        .account-number {
-            font-size: 24px;
-            color: var(--text-light-gray);
-            cursor: pointer;
-            transition: all 100ms ease;
-            font-weight: 600;
-            width: fit-content;
+  .second-column {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 10px;
 
-            &:hover {
-                color: var(--text-dark-gray);
-            }
-        }
+    button {
+      background-color: var(--light-gray);
+      border: 2px solid var(--text-gray);
+      font-size: 32px;
+      width: 245px;
+      text-align: left;
+      padding: 12px 16px;
+      border-radius: 10px;
+      transition: all 100ms ease;
+      cursor: pointer;
 
-        .card-info {
-            font-size: 24px;
-            color: var(--text-light-gray);
-            display: flex;
-            gap: 30px;
-            cursor: default;
+      &:hover {
+        background-color: var(--main-gray);
+      }
+    }
+  }
 
-            .cvv {
-                cursor: pointer;
-            }
+  .history-panel {
+    height: calc(60% - 10px);
+    position: relative;
 
-            .cvv:hover {
-                color: var(--text-dark-gray);
-            }
-        }
-
-        .balance-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-
-            i {
-                font-size: 24px;
-                color: var(--text-gray);
-                cursor: pointer;
-
-                &:hover {
-                    color: var(--text-dark-gray);
-                }
-            }
-        }
-
-        .balance {
-            font-weight: 700;
-            font-size: 64px;
-            cursor: default;
-        }
+    .history-date {
+      color: var(--text-gray);
     }
 
-    .second-column {
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        gap: 10px;
-
-        button {
-            background-color: var(--light-gray);
-            border: 2px solid var(--text-gray);
-            font-size: 32px;
-            width: 245px;
-            text-align: left;
-            padding: 12px 16px;
-            border-radius: 10px;
-            transition: all 100ms ease;
-            cursor: pointer;
-
-            &:hover {
-                background-color: var(--main-gray);
-            }
-        }
+    .clear-all {
+      position: absolute;
+      top: 33px;
+      right: 25px;
+      color: var(--main-red);
+      font-size: 24px;
+      cursor: pointer;
     }
 
-    .history-panel {
-        height: calc(60% - 10px);
-        position: relative;
+    ul {
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: scroll;
+      height: 330px;
 
-        .history-date {
-            color: var(--text-gray);
+      li {
+        .minus {
+          color: var(--main-red);
         }
 
-        .clear-all {
-            position: absolute;
-            top: 33px;
-            right: 25px;
-            color: var(--main-red);
-            font-size: 24px;
-            cursor: pointer;
+        cursor: default;
+
+        .plus {
+          color: var(--main-green);
         }
-
-        ul {
-            list-style-type: none;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            overflow-y: scroll;
-            height: 330px;
-
-            li {
-                .minus {
-                    color: var(--main-red);
-                }
-
-                cursor: default;
-
-                .plus {
-                    color: var(--main-green);
-                }
-
-                div {
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                }
-
-                display: flex;
-                font-size: 24px;
-                border: 2px solid var(--main-gray);
-                background-color: var(--main-gray);
-                justify-content: space-between;
-                padding: 12px 24px;
-                border-radius: 12px;
-            }
-        }
-    }
-
-    .cashback-panel {
-        height: calc(30% - 10px);
 
         div {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-            cursor: default;
-
-            i {
-                cursor: pointer;
-                font-size: 24px;
-                color: var(--text-gray);
-                transition: all 200ms ease;
-
-                &:hover {
-                    color: var(--text-dark-gray);
-                    rotate: 180deg;
-                }
-            }
-
-            margin-bottom: 60px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
         }
 
-        .cashback-amount {
-            font-size: 48px;
+        display: flex;
+        font-size: 24px;
+        border: 2px solid var(--main-gray);
+        background-color: var(--main-gray);
+        justify-content: space-between;
+        padding: 12px 24px;
+        border-radius: 12px;
+      }
+    }
+  }
 
-            span {
-                color: var(--main-green);
-                font-weight: 700;
-            }
+  .cashback-panel {
+    height: calc(30% - 10px);
+
+    div {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      cursor: default;
+
+      i {
+        cursor: pointer;
+        font-size: 24px;
+        color: var(--text-gray);
+        transition: all 200ms ease;
+
+        &:hover {
+          color: var(--text-dark-gray);
+          rotate: 180deg;
         }
+      }
+
+      margin-bottom: 12px;
     }
 
-    .operation-panel {
-        height: calc(70% - 10px);
+    button.login-btn {
+      font-size: 18px;
+    }
 
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
+    .cashback-amount {
+      font-size: 48px;
 
-            .form-field {
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
+      span {
+        color: var(--main-green);
+        font-weight: 700;
+      }
+    }
+  }
 
-                label,
-                input {
-                    font-size: 24px;
-                }
+  .operation-panel {
+    height: calc(70% - 10px);
 
-                label {
-                    color: var(--text-gray);
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
 
-                    &:hover {
-                        color: var(--text-dark-gray);
-                    }
-                }
+      .form-field {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
 
-                input {
-                    padding: 12px 18px;
-                    border-radius: 12px;
-                    border: 2px solid var(--text-gray)
-                }
-            }
-
-            button {
-                width: 300px;
-                margin-top: 90px;
-            }
+        label,
+        input {
+          font-size: 24px;
         }
-    }
 
-    .show-btn {
-        display: inline-block;
-    }
+        label {
+          color: var(--text-gray);
 
-    .hide-btn {
-        display: none;
+          &:hover {
+            color: var(--text-dark-gray);
+          }
+        }
+
+        input {
+          padding: 12px 18px;
+          border-radius: 12px;
+          border: 2px solid var(--text-gray);
+        }
+      }
+
+      button {
+        width: 300px;
+        margin-top: 90px;
+      }
     }
+  }
+
+  .show-btn {
+    display: inline-block;
+  }
+
+  .hide-btn {
+    display: none;
+  }
 }
